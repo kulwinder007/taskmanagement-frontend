@@ -9,7 +9,7 @@ on:
       - main  # Trigger on PR to the main branch
 
 env:
-  AWS_REGION: us-east-2  # Set the AWS Region for your ECR repository
+  AWS_REGION: us-east-1  # Set the AWS Region for your ECR repository
   ECR_REPO: taskmanager-frontend  # Specify the ECR repository name
   IMAGE_TAG: latest  # Specify the tag for the Docker image
 
