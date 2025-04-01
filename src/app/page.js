@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import TaskList from "@/components/TaskList";
-import { fetchTasks, addTask, deleteTask } from "@/services/api";
+import { fetchTasks, addTask, deleteTask,logoutUser } from "@/services/api";
 
 
 export default function Dashboard() {
@@ -14,7 +14,15 @@ export default function Dashboard() {
   const router = useRouter();
 
   useEffect(() => {
-    fetchTasks().then(setTasks);
+    const accessToken = localStorage.getItem("access_token");
+    if (!accessToken) {
+      router.push("/login"); // Redirect to login if no token
+      return; // Prevent further execution
+    }
+    fetchTasks().then((data) => {
+      console.log("Fetched tasks:", data);
+      setTasks(data);
+    });
   }, []);
 
   const handleAddTask = async () => {
@@ -28,6 +36,10 @@ export default function Dashboard() {
     await deleteTask(id);
     setTasks(tasks.filter((task) => task.id !== id));
   };
+  const handleLogout = async () => {
+    logoutUser();
+    router.push('/login')
+  };
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-gray-100 p-6">
@@ -38,7 +50,7 @@ export default function Dashboard() {
           <Button onClick={handleAddTask}>Add</Button>
         </div>
         <TaskList tasks={tasks} onDelete={handleDeleteTask} />
-        <Button onClick={() => router.push('/login')} className="mt-4 w-full bg-red-500 hover:bg-red-700">Logout</Button>
+        <Button onClick={handleLogout} className="mt-4 w-full bg-red-500 hover:bg-red-700">Logout</Button>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { loginUser } from "@/services/api";
+import { fetchTasks } from '@/services/api';
 import Link from 'next/link';
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -14,11 +15,13 @@ export default function Login() {
 
   const handleLogin = async () => {
     const data = await loginUser(email, password);
-    router.push("/");
-    // if (data.token) {
-    //   localStorage.setItem("token", data.token);
-    //   router.push("/");
-    // }
+    console.log(data)
+
+     if (data.access_token) {
+      router.push("/");
+    } else {
+      console.error("Login failed: Token not received.");
+    }
   };
 
   return (
