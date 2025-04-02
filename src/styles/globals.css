@@ -1,0 +1,18 @@
+/* styles/globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Apply font to the whole page */
+* {
+  font-family: 'Roboto', sans-serif;
+}
+body {
+  color: #333; /* You can replace this with your desired color */
+}
+/* Tailwind's base styles */
+@tailwind base;
+
+/* Tailwind's component styles */
+@tailwind components;
+
+/* Tailwind's utility classes */
+@tailwind utilities;
