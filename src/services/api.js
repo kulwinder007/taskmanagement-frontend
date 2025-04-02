@@ -1,5 +1,5 @@
-const BASE_URL_Task = process.env.NEXT_PUBLIC_API_URL_TASK || "http://localhost:5002"; 
-const BASE_URL_AUTH = process.env.NEXT_PUBLIC_API_URL_AUTH || "http://localhost:5001";
+const BASE_URL_Task = process.env.NEXT_PUBLIC_API_URL_TASK || "http://internal-InternalLB-1046953614.us-east-1.elb.amazonaws.com"; 
+const BASE_URL_AUTH = process.env.NEXT_PUBLIC_API_URL_AUTH || "http://internal-InternalLB-1046953614.us-east-1.elb.amazonaws.com";
 
 // Utility function to get the token from localStorage
 const getToken = () => {
